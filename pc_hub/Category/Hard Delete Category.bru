@@ -1,0 +1,20 @@
+meta {
+  name: Hard Delete Category
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://localhost:3001/categories/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 2
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

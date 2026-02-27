@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum UserPosition {
+  CUSTOMER
+  EMPLOYEE
+  ADMIN
+}
+
+enum CategoryStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id        Int          @id @default(autoincrement())
+  firstName String
+  lastName  String
+  position  UserPosition @default(CUSTOMER)
+  email     String       @unique
+  password  String
+  phone     String       @unique
+  createdAt DateTime     @default(now())
+}
+
+model Category {
+  id          Int            @id @default(autoincrement())
+  name        String
+  description String? // Can null value
+  status      CategoryStatus @default(ACTIVE)
+}

@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  # MySQL Database Service
+  db:
+    image: mysql:8.0
+    container_name: pc_hub_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin # Set your desired root password
+      MYSQL_DATABASE: pc_hub_db # Set a default database name
+      MYSQL_USER: admin # Set a default user
+      MYSQL_PASSWORD: admin # Set the user's password
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql # Persist data in a volume
+    networks:
+      - app-network
+
+  # phpMyAdmin Service
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin_container
+    restart: always
+    ports:
+      - '8080:80' # Access phpMyAdmin at http://localhost:8080
+    environment:
+      PMA_HOST: db # Connects to the 'db' service name
+      MYSQL_ROOT_PASSWORD: admin # Use the same root password
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+# Define volumes and networks
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
