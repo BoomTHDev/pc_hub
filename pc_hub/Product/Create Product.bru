@@ -1,0 +1,35 @@
+meta {
+  name: Create Product
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3001/products
+  body: json
+  auth: bearer
+}
+
+headers {
+  ~Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInBvc2l0aW9uIjoiQURNSU4iLCJpYXQiOjE3NzI0NDY3ODIsImV4cCI6MTc3MjQ1MDM4Mn0.NrxxBWN45Ppx7SElzIxP90_Ax2SHC9dSR7xptyr4jo4
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInBvc2l0aW9uIjoiQURNSU4iLCJpYXQiOjE3NzI0NDY3ODIsImV4cCI6MTc3MjQ1MDM4Mn0.NrxxBWN45Ppx7SElzIxP90_Ax2SHC9dSR7xptyr4jo4
+}
+
+body:json {
+  {
+    "name": "AMD Ryzen 7",
+    "description": "ตัวรอง Top ในสาย AMD",
+    "price": 10000,
+    "stockQuantity": 400,
+    "status": "ACTIVE",
+    "categoryId": 7
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

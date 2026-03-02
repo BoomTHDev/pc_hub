@@ -12,6 +12,11 @@ export const CategoryModel = {
   getAll() {
     return prisma.category.findMany({
       where: { status: "ACTIVE" },
+      include: {
+        products: {
+          select: { id: true, name: true },
+        },
+      },
     });
   },
 
