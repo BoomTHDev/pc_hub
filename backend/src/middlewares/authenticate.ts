@@ -5,7 +5,7 @@ import type { JwtPayload } from "../types/user";
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY!;
 
-export function anthenticate(req: Request, res: Response, next: NextFunction) {
+export function authenticate(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -24,7 +24,7 @@ export function anthenticate(req: Request, res: Response, next: NextFunction) {
 
   try {
     const payload = jwt.verify(token, JWT_SECRET_KEY) as JwtPayload;
-    console.log(payload);
+    req.user = payload;
     next();
   } catch (error) {
     throw new AppError(401, "Invalid or expired token");
