@@ -1,0 +1,20 @@
+meta {
+  name: Soft Delete Category
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:3001/categories/remove/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 3
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

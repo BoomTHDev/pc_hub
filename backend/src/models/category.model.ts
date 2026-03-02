@@ -17,7 +17,7 @@ export const CategoryModel = {
 
   getById(id: number) {
     return prisma.category.findFirst({
-      where: { id, status: "ACTIVE" },
+      where: { id },
     });
   },
 
@@ -44,6 +44,13 @@ export const CategoryModel = {
     return prisma.category.update({
       where: { id },
       data: { status: "INACTIVE" },
+    });
+  },
+
+  restore(id: number) {
+    return prisma.category.update({
+      where: { id },
+      data: { status: "ACTIVE" },
     });
   },
 };

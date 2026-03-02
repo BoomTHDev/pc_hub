@@ -16,5 +16,17 @@ router.delete(
   authorize("ADMIN"),
   CategoryController.delete,
 );
+router.delete(
+  "/remove/:id",
+  authenticate,
+  authorize("ADMIN", "EMPLOYEE"),
+  CategoryController.remove,
+);
+router.put(
+  "/restore/:id",
+  authenticate,
+  authorize("ADMIN"),
+  CategoryController.restore,
+);
 
 export default router;

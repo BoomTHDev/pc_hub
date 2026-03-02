@@ -1,0 +1,24 @@
+meta {
+  name: Restore Category
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:3001/categories/restore/:id
+  body: none
+  auth: inherit
+}
+
+params:path {
+  id: 6
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInBvc2l0aW9uIjoiQURNSU4iLCJpYXQiOjE3NzI0NDAwOTIsImV4cCI6MTc3MjQ0MzY5Mn0.qmQjhAYc589sKo3qT6XCcqWLM_nZc5d_aZQU1he9sp0
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
