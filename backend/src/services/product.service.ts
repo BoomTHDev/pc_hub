@@ -1,12 +1,12 @@
 import { ProductModel } from "../models/product.model";
-import type { CreateProductInput } from "../types/product";
+import type { CreateProductInput } from "../dto/product.dto";
 
 export const ProductService = {
   async findAll() {
     return await ProductModel.getAll();
   },
 
-  async createProduct(categoryId: number, payload: CreateProductInput) {
-    return await ProductModel.create(categoryId, payload);
+  async createProduct(payload: CreateProductInput) {
+    return await ProductModel.create(payload);
   },
 };

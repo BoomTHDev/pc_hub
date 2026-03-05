@@ -1,5 +1,5 @@
 import { prisma } from "../../lib/prisma";
-import type { CreateProductInput } from "../types/product";
+import type { CreateProductInput, UpdateProductInput } from "../dto/product.dto";
 
 export const ProductModel = {
   getAll() {
@@ -14,11 +14,27 @@ export const ProductModel = {
     });
   },
 
-  create(categoryId: number, data: CreateProductInput) {
+  create(data: CreateProductInput) {
     return prisma.product.create({
-      data: {
-        ...data,
-        categoryId,
+      data,
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        category: { select: { id: true, name: true } },
+      },
+    });
+  },
+
+  update(id: number, data: UpdateProductInput) {
+    return prisma.product.update({
+      where: { id },
+      data,
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        category: { select: { id: true, name: true } },
       },
     });
   },

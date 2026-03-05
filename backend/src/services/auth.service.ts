@@ -1,13 +1,13 @@
 import { AppError } from "../errors/AppError";
 import { UserModel } from "../models/user.model";
-import type { CreateUserInput, LoginUserInput } from "../types/user";
+import type { RegisterInput, LoginInput } from "../dto/auth.dto";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY!;
 
 export const AuthService = {
-  async register(payload: CreateUserInput) {
+  async register(payload: RegisterInput) {
     // Check user by email
     const exitingUser = await UserModel.getByEmail(payload.email);
     if (exitingUser) {
@@ -25,7 +25,7 @@ export const AuthService = {
     const hashedPassword = await bcrypt.hash(payload.password, salt);
 
     // Prepare data
-    const userData: CreateUserInput = {
+    const userData: RegisterInput = {
       ...payload,
       password: hashedPassword,
     };
@@ -34,7 +34,7 @@ export const AuthService = {
     return await UserModel.create(userData);
   },
 
-  async login(payload: LoginUserInput) {
+  async login(payload: LoginInput) {
     // Find user existing by email
     const existingUser = await UserModel.getByEmail(payload.email);
     if (!existingUser) {

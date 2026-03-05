@@ -6,7 +6,14 @@ import type {
 
 export const CategoryModel = {
   create(data: CreateCategoryInput) {
-    return prisma.category.create({ data });
+    return prisma.category.create({
+      data,
+      select: {
+        id: true,
+        name: true,
+        status: true,
+      },
+    });
   },
 
   getAll() {
@@ -23,6 +30,11 @@ export const CategoryModel = {
   getById(id: number) {
     return prisma.category.findFirst({
       where: { id },
+      include: {
+        products: {
+          select: { id: true, name: true },
+        },
+      },
     });
   },
 
@@ -36,12 +48,21 @@ export const CategoryModel = {
     return prisma.category.update({
       where: { id },
       data,
+      select: {
+        id: true,
+        name: true,
+        status: true,
+      },
     });
   },
 
   hardDelete(id: number) {
     return prisma.category.delete({
       where: { id },
+      select: {
+        id: true,
+        name: true,
+      },
     });
   },
 
@@ -49,6 +70,11 @@ export const CategoryModel = {
     return prisma.category.update({
       where: { id },
       data: { status: "INACTIVE" },
+      select: {
+        id: true,
+        name: true,
+        status: true,
+      },
     });
   },
 
@@ -56,6 +82,11 @@ export const CategoryModel = {
     return prisma.category.update({
       where: { id },
       data: { status: "ACTIVE" },
+      select: {
+        id: true,
+        name: true,
+        status: true,
+      },
     });
   },
 };
