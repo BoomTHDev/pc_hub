@@ -3,7 +3,7 @@ import { CategoryModel } from "../models/category.model";
 import type {
   CreateCategoryInput,
   UpdateCategoryInput,
-} from "../types/category";
+} from "../dto/category.dto";
 
 export const CategoryService = {
   async createCategory(payload: CreateCategoryInput) {

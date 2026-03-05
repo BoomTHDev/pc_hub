@@ -7,11 +7,15 @@ meta {
 delete {
   url: http://localhost:3001/categories/:id
   body: none
-  auth: inherit
+  auth: bearer
 }
 
 params:path {
-  id: 2
+  id: 11
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInBvc2l0aW9uIjoiQURNSU4iLCJpYXQiOjE3NzI0Nzg1NjQsImV4cCI6MTc3MjQ4MjE2NH0.SFDYRoff4nsX4xF1fyera1Lz_CWmY29SSEqj0F76o9Y
 }
 
 settings {

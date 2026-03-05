@@ -2,7 +2,7 @@ import { prisma } from "../../lib/prisma";
 import type {
   CreateCategoryInput,
   UpdateCategoryInput,
-} from "../types/category";
+} from "../dto/category.dto";
 
 export const CategoryModel = {
   create(data: CreateCategoryInput) {
