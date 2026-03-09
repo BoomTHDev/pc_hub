@@ -14,6 +14,21 @@ export const ProductModel = {
     });
   },
 
+  getById(id: number) {
+    return prisma.product.findFirst({
+      where: { id },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        price: true,
+        stockQuantity: true,
+        status: true,
+        category: { select: { id: true, name: true } },
+      },
+    });
+  },
+
   create(data: CreateProductInput) {
     return prisma.product.create({
       data,
@@ -35,6 +50,18 @@ export const ProductModel = {
         name: true,
         description: true,
         category: { select: { id: true, name: true } },
+      },
+    });
+  },
+
+  softDelete(id: number) {
+    return prisma.product.update({
+      where: { id },
+      data: { status: "INACTIVE" },
+      select: {
+        id: true,
+        name: true,
+        status: true,
       },
     });
   },
